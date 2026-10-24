@@ -1,0 +1,14 @@
+# Code segments of cdi_zelda (MPW builds programs in segments; a call within a segment is direct,
+# 'jsr d16(pc)', a call to another segment goes through the jump table, 'jsr N(a5)').
+# <segment> <first module address>. Each segment ends where the next one starts; the last one runs to
+# the end of the code. Found from config/jumptable.txt (the segment of every exported routine) and from
+# the direct calls in the game: each boundary is the only function start between the last routine of
+# one segment and the first of the next that no direct call crosses.
+1  000052
+2  004F4E
+3  00928A
+4  00EEC0
+5  012E74
+6  01679E
+7  01B2F8
+8  01CBBE

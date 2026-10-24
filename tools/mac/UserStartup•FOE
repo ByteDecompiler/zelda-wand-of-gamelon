@@ -1,0 +1,30 @@
+# UserStartup•FOE - run a compile job handed over from the host, then shut down.
+# The host puts build.mpw (plus sources) in the shared folder job: and waits for Basilisk II to exit.
+# The job is copied to MacOS7:Work: and built there, because MPW C cannot open files on the shared
+# (Unix) volume. Everything in Work: is copied back to job: afterwards. runner.txt traces each step.
+# Files are copied with Catenate (data fork only): Duplicate fails on the shared volume.
+If "`Exists Unix:job:build.mpw`"
+	Set Exit 0
+	Begin
+		Echo "# copying job in"
+		If "`Exists MacOS7:Work:`"
+			Delete -y MacOS7:Work:
+		End
+		NewFolder MacOS7:Work:
+		For __f in `Files -s Unix:job:`
+			If "{__f}" != "runner.txt"
+				Catenate "Unix:job:{__f}" > "MacOS7:Work:{__f}"
+			End
+		End
+		Files -l MacOS7:Work:
+		Directory MacOS7:Work:
+		Echo "# running build.mpw"
+		Execute MacOS7:Work:build.mpw ∑ MacOS7:Work:log.txt
+		Echo {Status} > MacOS7:Work:status.txt
+		Echo "# copying results out"
+		For __f in `Files -s MacOS7:Work:`
+			Catenate "MacOS7:Work:{__f}" > "Unix:job:{__f}"
+		End
+	End ∑ Unix:job:runner.txt
+	Shutdown -n
+End

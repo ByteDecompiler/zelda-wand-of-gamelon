@@ -1,0 +1,36 @@
+# Game data and anything made from it: never publish
+disc/
+extract/
+asm/
+bin/
+build/
+ghidra_project/
+
+# Apple software, ROM and disk images, downloads
+emu/*.ROM
+emu/*.dsk
+emu/pristine/
+emu/share/
+emu/jobs/
+emu/basilisk.log
+emu/.dirty
+emu/.basilisk_ii_xpram
+tools/downloads/
+tools/cdisks/
+tools/compilers/
+tools/mpw33/
+tools/mpw33_raw/
+tools/ghidra/
+
+# Python caches
+__pycache__/
+*.pyc
+tools/mame/
+tools/mame_dl/
+
+# Other projects' docs, kept locally as examples
+example_docs/
+emu/basilisk_prefs
+
+# Disc image zips as downloaded
+/*.zip

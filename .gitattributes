@@ -1,0 +1,3 @@
+# Keep LF line endings everywhere: emu/mpwrun.sh is a bash script, and the Mac-side files and C sources
+# are converted LF -> CR when they go to the emulated Mac.
+* text=auto eol=lf
